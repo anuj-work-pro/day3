@@ -10,7 +10,3 @@ class FlightPassenger(Document):
 			self.full_name = f"{self.first_name} {self.last_name}"
 		else:
 			self.full_name = self.first_name
-
-
-
-

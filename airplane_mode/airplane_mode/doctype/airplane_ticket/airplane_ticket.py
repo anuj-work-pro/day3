@@ -39,10 +39,3 @@ class AirplaneTicket(Document):
 
 	def on_submit(self):
 		self.status = "Completed"
-
-
-
-
-
-
-

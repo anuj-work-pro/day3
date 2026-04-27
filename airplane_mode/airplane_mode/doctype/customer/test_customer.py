@@ -1,9 +1,0 @@
-# Copyright (c) 2026, anuj and Contributors
-# See license.txt
-
-# import frappe
-from frappe.tests.utils import FrappeTestCase
-
-
-class Testcustomer(FrappeTestCase):
-	pass
