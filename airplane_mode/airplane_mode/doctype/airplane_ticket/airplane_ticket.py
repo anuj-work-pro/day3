@@ -1,6 +1,7 @@
 import random
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 
 
@@ -8,6 +9,7 @@ class AirplaneTicket(Document):
 	def validate(self):
 		self.calculate_total()
 		self.remove_duplicates()
+		self.check_capacity()
 
 	def calculate_total(self):
 		total = self.flight_price or 0
@@ -39,3 +41,18 @@ class AirplaneTicket(Document):
 
 	def on_submit(self):
 		self.status = "Completed"
+
+	def check_capacity(self):
+		flight = frappe.get_doc("Airplane Flight", self.flight)
+		airplane = frappe.get_doc("Airplane", flight.airplane)
+
+		booked_count = frappe.db.count(
+			"Airplane Ticket",
+			{
+				"flight": self.flight,
+				"docstatus": ["!=", 2],
+			},
+		)
+
+		if booked_count >= airplane.capacity:
+			frappe.throw(_("No seats available for this flight."))
