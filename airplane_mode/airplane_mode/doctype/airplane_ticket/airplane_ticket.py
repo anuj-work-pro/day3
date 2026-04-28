@@ -1,6 +1,7 @@
 import random
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 
 
@@ -54,4 +55,4 @@ class AirplaneTicket(Document):
 		)
 
 		if booked_count >= airplane.capacity:
-			frappe.throw("No seats available for this flight.")
+			frappe.throw(_("No seats available for this flight."))
