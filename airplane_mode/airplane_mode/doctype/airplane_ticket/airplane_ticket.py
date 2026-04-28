@@ -41,7 +41,7 @@ class AirplaneTicket(Document):
 	def on_submit(self):
 		self.status = "Completed"
 
-    def check_capacity(self):
+	def check_capacity(self):
 		flight = frappe.get_doc("Airplane Flight", self.flight)
 		airplane = frappe.get_doc("Airplane", flight.airplane)
 
@@ -49,8 +49,8 @@ class AirplaneTicket(Document):
 			"Airplane Ticket",
 			{
 				"flight": self.flight,
-				"docstatus": ["!=", 2]
-			}
+				"docstatus": ["!=", 2],
+			},
 		)
 
 		if booked_count >= airplane.capacity:
